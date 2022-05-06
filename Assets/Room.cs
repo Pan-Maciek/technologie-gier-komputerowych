@@ -8,7 +8,8 @@ public class Room : MonoBehaviour {
 
     public float randomWeight = 1;
 
-    public static readonly Vector2 Size = new(18 * 0.16f, 18 * 0.16f) ;
+    // public static readonly Vector2 Size = new(18 * 0.16f, 18 * 0.16f) ;
+    public static readonly Vector2 Size = new(48 * 0.16f, 48 * 0.16f) ;
     // Start is called before the first frame update
     void Start()
     {

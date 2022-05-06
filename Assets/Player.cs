@@ -2,10 +2,13 @@ using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    // Start is called before the first frame update
+
+    public AnimationCurve levelingCurve;
+    
     private MapGenerator _map;
     void Start() {
         _map = FindObjectOfType<MapGenerator>();
+        levelingCurve.Evaluate(1.0f);
     }
 
     // Update is called once per frame

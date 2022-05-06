@@ -6,12 +6,13 @@ using static RoomEntry;
 public class MapGenerator : MonoBehaviour {
     public Room[] roomPrefabs;
     public Room firstRoom;
+    public Transform instanceParent;
     
     private readonly Dictionary<(int, int), Room> _generatedRooms = new();
     private readonly HashSet<(int, int)> _visited = new();
     
     void Start() {
-        var room = Instantiate(firstRoom);
+        var room = Instantiate(firstRoom, instanceParent, true);
         _generatedRooms[(0, 0)] = room;
     }
 
@@ -27,10 +28,8 @@ public class MapGenerator : MonoBehaviour {
     
     private static bool TestMustHave(RoomEntry entry, RoomEntry actual) => 
         (entry, actual) switch {
-            (Small, Small) => true,
-            (None, None) => true,
             (Undefined, _) => true,
-            _ => false
+            var (x, y) => x == y
         };
     
     private void GenerateRoomAt(int x, int y) {
@@ -52,7 +51,7 @@ public class MapGenerator : MonoBehaviour {
         if (goodRooms.Length == 0) return;
 
         // 3. Select random room and instantiate it
-        var room = Instantiate(RandomRoom(goodRooms));
+        var room = Instantiate(RandomRoom(goodRooms), instanceParent, true);
         room.transform.position = new Vector3(Room.Size.x * x, Room.Size.y * y, 1);
         _generatedRooms[(x, y)] = room;
 
