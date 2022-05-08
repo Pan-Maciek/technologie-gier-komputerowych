@@ -1,28 +1,116 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Concurrent;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
+    public Animator animator;
+    public AnimationCurve accelCurve;
+    public AnimationCurve deaccelCurve;
 
-    public AnimationCurve levelingCurve;
-    
-    private MapGenerator _map;
-    void Start() {
-        _map = FindObjectOfType<MapGenerator>();
-        levelingCurve.Evaluate(1.0f);
+    AnimationCurve currentCurve;
+    float accelTime = 6f / 60f;
+    float deaccelTime = 3f / 60f;
+    float curveTiming;
+    float topSpeed = 5f;
+    float currentSpeed = 0f;
+    float timeSinceAccelStart = 0f;
+    bool inDash = false;
+    bool inRoll = false;
+    Vector3 accelDir;
+
+
+
+    SpriteRenderer renderer;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        Vector2Int key = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+
+        renderer= GetComponent<SpriteRenderer>();
+
     }
 
-    // Update is called once per frame
-    void FixedUpdate() {
-        var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
-        var pos = transform.position += new Vector3(x, y) * 0.02f;
+        // Update is called once per frame
+        void Update(){
 
-        var X = pos.x;
-        var Y = pos.y;
+        Vector3 velocity=new Vector3(0,0,0);
+        Vector3 keyInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        Vector3 normalizedDir = keyInput.normalized;
 
-        var xx = (int) (Math.Sign(X) * Math.Floor((Math.Abs(X) + Room.Size.x / 2) / Room.Size.x));
-        var yy = (int) (Math.Sign(Y) * Math.Floor((Math.Abs(Y) + Room.Size.y / 2) / Room.Size.y));
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            animator.SetBool("dash", true);
+            inDash = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftControl)) {
+            animator.SetBool("roll", true);
+            inRoll = true;
+        }
         
-        _map.Generate(xx, yy);
+        
+
+        if (currentSpeed > 0) {
+            Debug.Log(currentSpeed);
+            if (currentCurve!=deaccelCurve&&currentSpeed > 0.99 * topSpeed && normalizedDir.x == 0 && normalizedDir.y == 0) {
+                currentCurve = deaccelCurve;
+                curveTiming = deaccelTime;
+                timeSinceAccelStart = 0;
+            }
+            if (normalizedDir.magnitude>0&&normalizedDir != accelDir)
+                accelDir = normalizedDir;
+            timeSinceAccelStart += Time.deltaTime;
+            velocity = accelDir * topSpeed * currentCurve.Evaluate(timeSinceAccelStart / accelTime);
+            //Debug.Log(velocity);
+        }
+        else {
+            currentCurve = accelCurve;
+            curveTiming = accelTime;
+            velocity = normalizedDir * topSpeed * accelCurve.Evaluate(Time.deltaTime/accelTime);
+            accelDir = normalizedDir;
+        }
+
+
+        if (inDash)
+            velocity = accelDir * 1.5f * topSpeed;
+        else if (inRoll) {
+            velocity = accelDir * 1.25f * topSpeed;
+        }
+
+        Vector3 move = velocity * Time.deltaTime;
+
+        currentSpeed = Mathf.Abs(velocity.x) + Mathf.Abs(velocity.y);
+        if (currentSpeed > 0) {
+            transform.Translate(move);
+            animator.SetFloat("speed_x", Mathf.Abs(move.x));
+            animator.SetFloat("speed_y", move.y);
+        }
+
+        if (move.x > 0.01)
+            renderer.flipX = false;
+        else if(move.x<-0.01)
+            renderer.flipX = true;
+
+
+
     }
+
+    public void OnDashEnded() {
+        animator.SetBool("dash", false);
+        inDash = false;
+        currentCurve = accelCurve;
+
+    }
+    public void OnRollEnded()
+    {
+        animator.SetBool("roll", false);
+        inRoll = false;
+        currentCurve = accelCurve;
+
+
+    }
+
+
 }
