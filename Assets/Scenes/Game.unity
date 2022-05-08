@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 1732343378}
   - component: {fileID: 1732343377}
   - component: {fileID: 1732343379}
+  - component: {fileID: 1732343380}
   m_Layer: 0
   m_Name: run_128_0
   m_TagString: Untagged
@@ -363,9 +364,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914d476820d01154a8ae50c9977fc791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelingCurve:
+  animator: {fileID: 1732343380}
+  accelCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.036216773
+      outSlope: 0.036216773
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.060818315
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.3176637
+      outSlope: 3.3176637
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.015601993
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  deaccelCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -3.1525047
+      outSlope: -3.1525047
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.01607003
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.021404618
+      outSlope: -0.021404618
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.102905035
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -500,6 +544,26 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7072433901408459502, guid: 75c387ac107c28d03bbb3c1bf0840bbe, type: 3}
   BulletsPerSecond: 10
   BulletVelocity: 2
+--- !u!95 &1732343380
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732343373}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4321aebcfaf6f540884f9e083c4f5de, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2117062687
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +623,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1171320299
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -599,7 +663,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914d476820d01154a8ae50c9977fc791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelingCurve:
+  animator: {fileID: 0}
+  accelCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  deaccelCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
