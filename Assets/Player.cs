@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     float accelTime = 6f / 60f;
     float deaccelTime = 3f / 60f;
     float curveTiming;
-    float topSpeed = 5f;
+    float topSpeed = 1.5f;
     float currentSpeed = 0f;
     float timeSinceAccelStart = 0f;
     bool inDash = false;
@@ -88,9 +88,9 @@ public class Player : MonoBehaviour
             animator.SetFloat("speed_y", move.y);
         }
 
-        if (move.x > 0.01)
+        if (move.x > 0.001)
             renderer.flipX = false;
-        else if(move.x<-0.01)
+        else if(move.x<-0.001)
             renderer.flipX = true;
 
 
