@@ -13,13 +13,13 @@ public class Player : MonoBehaviour
     float accelTime = 6f / 60f;
     float deaccelTime = 3f / 60f;
     float curveTiming;
-    float topSpeed = 1.5f;
+    float topSpeed = 2f;
     float currentSpeed = 0f;
     float timeSinceAccelStart = 0f;
     bool inDash = false;
     bool inRoll = false;
     Vector3 accelDir;
-
+    Vector3 velocity;
 
 
     SpriteRenderer renderer;
@@ -34,10 +34,10 @@ public class Player : MonoBehaviour
 
     }
 
-        // Update is called once per frame
-        void Update(){
+    // Update is called once per frame
+    void Update(){
 
-        Vector3 velocity=new Vector3(0,0,0);
+        velocity=new Vector3(0,0,0);
         Vector3 keyInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
         Vector3 normalizedDir = keyInput.normalized;
 
@@ -79,9 +79,16 @@ public class Player : MonoBehaviour
             velocity = accelDir * 1.25f * topSpeed;
         }
 
-        Vector3 move = velocity * Time.deltaTime;
-
         currentSpeed = Mathf.Abs(velocity.x) + Mathf.Abs(velocity.y);
+        
+
+
+
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 move= velocity * Time.deltaTime;
         if (currentSpeed > 0) {
             transform.Translate(move);
             animator.SetFloat("speed_x", Mathf.Abs(move.x));
@@ -90,14 +97,11 @@ public class Player : MonoBehaviour
 
         if (move.x > 0.001)
             renderer.flipX = false;
-        else if(move.x<-0.001)
+        else if (move.x < -0.001)
             renderer.flipX = true;
 
-
-
     }
-
-    public void OnDashEnded() {
+        public void OnDashEnded() {
         animator.SetBool("dash", false);
         inDash = false;
         currentCurve = accelCurve;
