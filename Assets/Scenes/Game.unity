@@ -467,6 +467,7 @@ MonoBehaviour:
   - {fileID: 5446077661736176341, guid: a464d18a34b43484abddf0562a56c912, type: 3}
   firstRoom: {fileID: 5446077661736176341, guid: a464d18a34b43484abddf0562a56c912, type: 3}
   instanceParent: {fileID: 0}
+  player: {fileID: 1732343374}
 --- !u!4 &768081370
 Transform:
   m_ObjectHideFlags: 0
