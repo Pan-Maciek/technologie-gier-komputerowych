@@ -19,10 +19,14 @@ public class Player : MonoBehaviour
     bool inDash = false;
     bool inRoll = false;
     Vector3 accelDir;
-    Vector3 velocity;
+    internal Vector3 velocity;
 
 
     SpriteRenderer renderer;
+    private static readonly int SpeedX = Animator.StringToHash("speed_x");
+    private static readonly int SpeedY = Animator.StringToHash("speed_y");
+    private static readonly int Dash = Animator.StringToHash("dash");
+    private static readonly int Roll = Animator.StringToHash("roll");
 
     // Start is called before the first frame update
     void Start()
@@ -38,11 +42,11 @@ public class Player : MonoBehaviour
         Vector3 normalizedDir = keyInput.normalized;
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
-            animator.SetBool("dash", true);
+            animator.SetBool(Dash, true);
             inDash = true;
         }
         else if (Input.GetKeyDown(KeyCode.LeftControl)) {
-            animator.SetBool("roll", true);
+            animator.SetBool(Roll, true);
             inRoll = true;
         }
         
@@ -91,8 +95,8 @@ public class Player : MonoBehaviour
         Vector3 move= velocity * Time.deltaTime;
         if (currentSpeed > 0) {
             transform.Translate(move);
-            animator.SetFloat("speed_x", Mathf.Abs(move.x));
-            animator.SetFloat("speed_y", move.y);
+            animator.SetFloat(SpeedX, Mathf.Abs(move.x));
+            animator.SetFloat(SpeedY, move.y);
         }
 
         if (move.x > 0.001)
@@ -103,14 +107,14 @@ public class Player : MonoBehaviour
     }
 
     public void OnDashEnded() {
-        animator.SetBool("dash", false);
+        animator.SetBool(Dash, false);
         inDash = false;
         currentCurve = accelCurve;
 
     }
     public void OnRollEnded()
     {
-        animator.SetBool("roll", false);
+        animator.SetBool(Roll, false);
         inRoll = false;
         currentCurve = accelCurve;
 

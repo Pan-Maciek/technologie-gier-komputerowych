@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static RoomEntry;
+using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour {
     public Room[] roomPrefabs;
     public Room firstRoom;
     public Transform instanceParent;
+    public Player player;
     
     private readonly Dictionary<(int, int), Room> _generatedRooms = new();
     private readonly HashSet<(int, int)> _visited = new();
@@ -57,8 +60,6 @@ public class MapGenerator : MonoBehaviour {
 
     }
     
-    
-
     public void Generate(int x, int y) {
         if (_visited.Contains((x, y))) return;
         _visited.Add((x, y));
@@ -67,5 +68,16 @@ public class MapGenerator : MonoBehaviour {
         if (baseRoom.right is not None) GenerateRoomAt(x + 1, y);
         if (baseRoom.top is not None) GenerateRoomAt(x, y + 1);
         if (baseRoom.bottom is not None) GenerateRoomAt(x, y - 1);
+    }
+
+    public void FixedUpdate() {
+        var pos = player.transform.position;
+        var x = pos.x;
+        var y = pos.y;
+
+        var xx = (int) (Math.Sign(x) * Math.Floor((Math.Abs(x) + Room.Size.x / 2) / Room.Size.x));
+        var yy = (int) (Math.Sign(y) * Math.Floor((Math.Abs(y) + Room.Size.y / 2) / Room.Size.y));
+        
+        Generate(xx, yy);
     }
 }
