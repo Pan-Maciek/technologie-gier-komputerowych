@@ -594,14 +594,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 380018901601101429, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1732343376}
-    - target: {fileID: 1627709559250060213, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1814270729929624829, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -610,30 +602,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6169997459373977483, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
-      propertyPath: height
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169997459373977483, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
-      propertyPath: radius
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169997459373977483, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
-      propertyPath: maxSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169997459373977483, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
-      propertyPath: alwaysDrawGizmos
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169997459373977483, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
-      propertyPath: slowdownDistance
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169997459373977483, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
-      propertyPath: pickNextWaypointDist
-      value: 0.3
-      objectReference: {fileID: 0}
+    - target: {fileID: 4028511038852669180, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1732343376}
     - target: {fileID: 8149757963209484224, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
       propertyPath: m_RootOrder
       value: 1
