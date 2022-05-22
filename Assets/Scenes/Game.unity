@@ -496,7 +496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d30f1df4a8c9746cbed4cba6a9f8916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsDelayBetweenSpawning: 5
+  enemyPrefab: {fileID: 1814270729929624829, guid: f529e55e57b04884ca887c2aa46cc06f, type: 3}
+  secondsDelayBetweenSpawning: 1
 --- !u!1 &1435867194
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +688,7 @@ GameObject:
   - component: {fileID: 1732343380}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
