@@ -21,8 +21,11 @@ public class GenerateEnemies : MonoBehaviour
     {
         if (Time.time - lastTime > secondsDelayBetweenSpawning)
         {
-            var enemy = Instantiate(enemyPrefab, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0));
-            enemy.GetComponent<AIDestinationSetter>().target = FindObjectOfType<Player>().GetComponent<Transform>();
+			var playerTransform = FindObjectOfType<Player>().GetComponent<Transform>();
+			var randVector = new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f) ,0);
+
+            var enemy = Instantiate(enemyPrefab, playerTransform.position + randVector, Quaternion.Euler(0, 0, 0));
+            enemy.GetComponent<AIDestinationSetter>().target = playerTransform;
             lastTime = Time.time;
         }
     }
