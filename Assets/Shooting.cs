@@ -25,6 +25,6 @@ public class Shooting : MonoBehaviour
         var angle = Mathf.Atan2(lookDir.y,lookDir.x) * Mathf.Rad2Deg * Mathf.Deg2Rad;
 
         var bullet = Instantiate(bulletPrefab, playerPosition, Quaternion.Euler(0, 0, 0));
-        bullet.GetComponent<Rigidbody2D>().AddForce(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * BulletVelocity + rb.velocity, ForceMode2D.Impulse);
+        bullet.GetComponent<Rigidbody2D>().AddForce(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * BulletVelocity, ForceMode2D.Impulse);
     }
 }

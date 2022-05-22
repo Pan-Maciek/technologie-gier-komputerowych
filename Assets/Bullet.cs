@@ -20,7 +20,16 @@ public class Bullet : MonoBehaviour
         }
         transform.Translate(velocity);
     }
-    void OnCollisionEnter2D(Collision2D collision){
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.name.Contains("Enemy"))
+        {
+            collision.gameObject.GetComponent<EnemyHP>().hpAmount--;
+            Debug.Log(collision.gameObject.GetComponent<EnemyHP>().hpAmount);
+            // Destroy(collision.gameObject);    
+        }
+        
         Destroy(gameObject);
     }
 }
