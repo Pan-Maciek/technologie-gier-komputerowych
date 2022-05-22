@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 public class GenerateEnemies : MonoBehaviour
@@ -21,6 +22,7 @@ public class GenerateEnemies : MonoBehaviour
         if (Time.time - lastTime > secondsDelayBetweenSpawning)
         {
             var enemy = Instantiate(enemyPrefab, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0));
+            enemy.GetComponent<AIDestinationSetter>().target = FindObjectOfType<Player>().GetComponent<Transform>();
             lastTime = Time.time;
         }
     }

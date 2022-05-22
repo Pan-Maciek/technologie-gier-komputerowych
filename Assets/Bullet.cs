@@ -26,8 +26,6 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.name.Contains("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyHP>().hpAmount--;
-            Debug.Log(collision.gameObject.GetComponent<EnemyHP>().hpAmount);
-            // Destroy(collision.gameObject);    
         }
         
         Destroy(gameObject);
