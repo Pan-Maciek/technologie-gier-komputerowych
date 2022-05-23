@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class EnemyHP : MonoBehaviour
 {
-    public int hpAmount;
+    public float hpAmount;
 
-    void Update()
+    public void takeDamage(float dmgAmount)
     {
+		hpAmount -= dmgAmount;
         if (hpAmount <= 0)
         {
             Destroy(this.gameObject);
         }
     }
+
+	
 }
